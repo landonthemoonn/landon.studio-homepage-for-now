@@ -397,6 +397,10 @@
 }
 
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
+
   .absolute {
     position: absolute;
   }
@@ -443,6 +447,10 @@
 
   .left-\[50px\] {
     left: 50px;
+  }
+
+  .z-0 {
+    z-index: 0;
   }
 
   .z-10 {

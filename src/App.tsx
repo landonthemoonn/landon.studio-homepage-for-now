@@ -1,6 +1,18 @@
 import { motion, useScroll, useTransform, useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
-import MacBookPro from './imports/MacBookPro142';
+
+// Import your actual Figma assets
+import imgLandonStudio1 from "figma:asset/31b90ec24eb4d49e32a23c7465d7115c94fc153b.png";
+import imgRectangle8 from "figma:asset/33cd1fd67b6e6feffc2f9ea5729b0bbbdc43b3c9.png";
+import imgRectangle9 from "figma:asset/f1a1e2f036499fa1edfaa857a1dba84cd3b4d63d.png";
+import imgCleanShot20251110At1314212X1 from "figma:asset/0435dcf9f857ba7e769dd823fb00bd1a6df29d3a.png";
+
+// Your actual content from Figma
+const LOGO_PATH = imgLandonStudio1;
+const VIDEO_PATH = '/_videos/v1/13b156371c749f2265f77a5845d730175faed609';
+const SCREENSHOT_LEFT = imgRectangle8;
+const SCREENSHOT_CENTER = imgCleanShot20251110At1314212X1;
+const SCREENSHOT_RIGHT = imgRectangle9;
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +62,7 @@ export default function App() {
       <div className="relative w-full" style={{ minHeight: isMobile ? 'auto' : '2400px' }}>
         {/* Video Background - Full Screen */}
         <motion.div 
-          className="fixed inset-0 w-full h-screen"
+          className="fixed inset-0 w-full h-screen z-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2 }}
@@ -62,10 +74,11 @@ export default function App() {
             loop 
             muted
             playsInline
+            preload="auto"
           >
-            <source src="/_videos/v1/13b156371c749f2265f77a5845d730175faed609" />
+            <source src={VIDEO_PATH} />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
         </motion.div>
 
         {/* Navigation Bar */}
@@ -87,7 +100,7 @@ export default function App() {
               <img 
                 alt="landon.studio" 
                 className="h-full w-full object-contain"
-                src="figma:asset/31b90ec24eb4d49e32a23c7465d7115c94fc153b.png"
+                src={LOGO_PATH}
               />
             </motion.div>
 
@@ -246,9 +259,9 @@ export default function App() {
             {/* For Mobile: Stack Cards Vertically */}
             <div className="lg:hidden flex flex-col items-center gap-8">
               {[
-                { src: "figma:asset/33cd1fd67b6e6feffc2f9ea5729b0bbbdc43b3c9.png", delay: 0.4 },
-                { src: "figma:asset/0435dcf9f857ba7e769dd823fb00bd1a6df29d3a.png", delay: 0.6 },
-                { src: "figma:asset/f1a1e2f036499fa1edfaa857a1dba84cd3b4d63d.png", delay: 0.8 }
+                { src: SCREENSHOT_LEFT, delay: 0.4 },
+                { src: SCREENSHOT_CENTER, delay: 0.6 },
+                { src: SCREENSHOT_RIGHT, delay: 0.8 }
               ].map((card, idx) => (
                 <motion.div
                   key={idx}
@@ -290,7 +303,7 @@ export default function App() {
                   <motion.img 
                     alt="" 
                     className="absolute inset-0 w-full h-full object-cover"
-                    src="figma:asset/33cd1fd67b6e6feffc2f9ea5729b0bbbdc43b3c9.png"
+                    src={SCREENSHOT_LEFT}
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   />
@@ -314,7 +327,7 @@ export default function App() {
                   <motion.img 
                     alt="" 
                     className="absolute inset-0 w-full h-full object-cover"
-                    src="figma:asset/0435dcf9f857ba7e769dd823fb00bd1a6df29d3a.png"
+                    src={SCREENSHOT_CENTER}
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   />
@@ -338,7 +351,7 @@ export default function App() {
                   <motion.img 
                     alt="" 
                     className="absolute inset-0 w-full h-full object-cover"
-                    src="figma:asset/f1a1e2f036499fa1edfaa857a1dba84cd3b4d63d.png"
+                    src={SCREENSHOT_RIGHT}
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   />
