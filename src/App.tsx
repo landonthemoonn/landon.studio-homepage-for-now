@@ -1,5 +1,7 @@
 import { motion, useScroll, useTransform, useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
+import { ContactForm } from './components/ContactForm';
+import { Toaster } from './components/ui/sonner';
 
 // Your actual Figma assets
 import imgLandonStudio1 from "figma:asset/31b90ec24eb4d49e32a23c7465d7115c94fc153b.png";
@@ -18,6 +20,7 @@ export default function App() {
   const heroRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
   
   const [isMobile, setIsMobile] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,6 +32,7 @@ export default function App() {
 
   const heroInView = useInView(heroRef, { once: false, amount: 0.3 });
   const cardsInView = useInView(cardsRef, { once: false, amount: 0.2 });
+  const contactInView = useInView(contactRef, { once: false, amount: 0.3 });
 
   // Parallax effects
   const heroY = useTransform(scrollYProgress, [0, 0.5], ['0%', '20%']);
@@ -61,15 +65,20 @@ export default function App() {
       <div className="relative w-full" style={{ minHeight: isMobile ? 'auto' : '2400px' }}>
         {/* Video Background - Full Screen */}
         <div className="fixed inset-0 w-full h-screen z-0">
+          {/* Fallback gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2d2d2d] to-[#0a0a0a]" />
+          
+          {/* Video overlay */}
           <video 
             autoPlay 
-            src={VIDEO_PATH}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover opacity-80"
             controlsList="nodownload" 
             loop 
             muted
             playsInline
-          />
+          >
+            <source src={VIDEO_PATH} />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
         </div>
 
@@ -353,9 +362,34 @@ export default function App() {
           </div>
         </motion.div>
 
+        {/* Contact Section */}
+        <motion.div 
+          ref={contactRef}
+          id="contact"
+          className="relative z-20 min-h-screen flex items-center justify-center px-4 py-20 lg:py-32"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 2 }}
+        >
+          <ContactForm inView={contactInView} />
+        </motion.div>
+
         {/* Bottom Spacer */}
         <div className="h-32" />
       </div>
+
+      {/* Toast Notifications */}
+      <Toaster 
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            color: 'white',
+          },
+        }}
+      />
     </div>
   );
 }
