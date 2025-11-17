@@ -65,8 +65,8 @@ export default function App() {
       <div className="relative w-full" style={{ minHeight: isMobile ? 'auto' : '2400px' }}>
         {/* Video Background - Full Screen */}
         <div className="fixed inset-0 w-full h-screen z-0">
-          {/* Fallback gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2d2d2d] to-[#0a0a0a]" />
+          {/* Fallback background - warm beige/tan color */}
+          <div className="absolute inset-0 bg-[#b5aca0]" />
           
           {/* Video overlay */}
           <video 
@@ -260,13 +260,16 @@ export default function App() {
             {/* For Mobile: Stack Cards Vertically */}
             <div className="lg:hidden flex flex-col items-center gap-8">
               {[
-                { src: SCREENSHOT_LEFT, delay: 0.4 },
-                { src: SCREENSHOT_CENTER, delay: 0.6 },
-                { src: SCREENSHOT_RIGHT, delay: 0.8 }
+                { src: SCREENSHOT_LEFT, delay: 0.4, url: 'https://www.landonOS.com' },
+                { src: SCREENSHOT_CENTER, delay: 0.6, url: 'https://www.landonray.photos' },
+                { src: SCREENSHOT_RIGHT, delay: 0.8, url: 'https://www.landonstrempel.com' }
               ].map((card, idx) => (
-                <motion.div
+                <motion.a
                   key={idx}
-                  className="relative w-full max-w-[400px]"
+                  href={card.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative w-full max-w-[400px] block"
                   initial={{ opacity: 0, y: 100 }}
                   animate={cardsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: card.delay }}
@@ -281,15 +284,18 @@ export default function App() {
                       transition={{ duration: 0.4 }}
                     />
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
 
             {/* For Desktop: Overlapping Layout */}
             <div className="hidden lg:block relative h-[700px]">
               {/* Left Card - Tilted */}
-              <motion.div
-                className="absolute left-[50px] top-1/2 -translate-y-1/2"
+              <motion.a
+                href="https://www.landonOS.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute left-[50px] top-1/2 -translate-y-1/2 block"
                 initial={{ opacity: 0, x: -200, rotate: 0 }}
                 animate={cardsInView ? { opacity: 1, x: 0, rotate: -2.16 } : {}}
                 transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -309,11 +315,14 @@ export default function App() {
                     transition={{ duration: 0.5 }}
                   />
                 </div>
-              </motion.div>
+              </motion.a>
 
               {/* Center Card - On Top */}
-              <motion.div
-                className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20"
+              <motion.a
+                href="https://www.landonray.photos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 block"
                 initial={{ opacity: 0, y: 150, scale: 0.8 }}
                 animate={cardsInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -333,11 +342,14 @@ export default function App() {
                     transition={{ duration: 0.5 }}
                   />
                 </div>
-              </motion.div>
+              </motion.a>
 
               {/* Right Card - Tilted */}
-              <motion.div
-                className="absolute right-[50px] top-1/2 -translate-y-1/2"
+              <motion.a
+                href="https://www.landonstrempel.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute right-[50px] top-1/2 -translate-y-1/2 block"
                 initial={{ opacity: 0, x: 200, rotate: 0 }}
                 animate={cardsInView ? { opacity: 1, x: 0, rotate: 3.45 } : {}}
                 transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -357,7 +369,7 @@ export default function App() {
                     transition={{ duration: 0.5 }}
                   />
                 </div>
-              </motion.div>
+              </motion.a>
             </div>
           </div>
         </motion.div>
