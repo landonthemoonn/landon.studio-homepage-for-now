@@ -1,13 +1,12 @@
 import { motion, useScroll, useTransform, useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 
-// Import your actual Figma assets
+// Your actual Figma assets
 import imgLandonStudio1 from "figma:asset/31b90ec24eb4d49e32a23c7465d7115c94fc153b.png";
 import imgRectangle8 from "figma:asset/33cd1fd67b6e6feffc2f9ea5729b0bbbdc43b3c9.png";
 import imgRectangle9 from "figma:asset/f1a1e2f036499fa1edfaa857a1dba84cd3b4d63d.png";
 import imgCleanShot20251110At1314212X1 from "figma:asset/0435dcf9f857ba7e769dd823fb00bd1a6df29d3a.png";
 
-// Your actual content from Figma
 const LOGO_PATH = imgLandonStudio1;
 const VIDEO_PATH = '/_videos/v1/13b156371c749f2265f77a5845d730175faed609';
 const SCREENSHOT_LEFT = imgRectangle8;
@@ -61,25 +60,18 @@ export default function App() {
       {/* Animated Wrapper for Desktop */}
       <div className="relative w-full" style={{ minHeight: isMobile ? 'auto' : '2400px' }}>
         {/* Video Background - Full Screen */}
-        <motion.div 
-          className="fixed inset-0 w-full h-screen z-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2 }}
-        >
+        <div className="fixed inset-0 w-full h-screen z-0">
           <video 
             autoPlay 
+            src={VIDEO_PATH}
             className="absolute inset-0 w-full h-full object-cover"
             controlsList="nodownload" 
             loop 
             muted
             playsInline
-            preload="auto"
-          >
-            <source src={VIDEO_PATH} />
-          </video>
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
-        </motion.div>
+        </div>
 
         {/* Navigation Bar */}
         <motion.div 
