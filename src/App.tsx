@@ -194,7 +194,7 @@ export default function App() {
               transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <motion.p 
-                className="text-[50px] sm:text-[80px] lg:text-[150px] leading-[0.9] tracking-[-3px] mb-2 lg:mb-0"
+                className="text-[40px] sm:text-[80px] lg:text-[150px] leading-[1.1] sm:leading-[0.95] lg:leading-[0.9] tracking-[-2px] lg:tracking-[-3px] mb-4 lg:mb-0"
                 initial={{ opacity: 0, x: -50 }}
                 animate={heroInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 1, delay: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -202,7 +202,7 @@ export default function App() {
                 BIG THINGS ARE COMING
               </motion.p>
               <motion.p 
-                className="text-[30px] sm:text-[60px] lg:text-[150px] leading-[0.9] tracking-[-3px]"
+                className="text-[28px] sm:text-[60px] lg:text-[150px] leading-[1.1] sm:leading-[0.95] lg:leading-[0.9] tracking-[-1px] lg:tracking-[-3px]"
                 initial={{ opacity: 0, x: 50 }}
                 animate={heroInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
